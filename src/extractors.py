@@ -23,7 +23,7 @@ def extract_hs_gpt2(s, pipe: pipeline):
         s = tok(s, return_tensors="pt", padding="max_length", max_length=512).to(
             pipe.device
         )
-        return pipe.model.transformer(**s)["last_hidden_state"][-1][-1, :]
+        return pipe.model.transformer(**s)["last_hidden_state"][:, -1]
 
 
 def extract_hs_mistral_instruct(s, pipe: pipeline):
